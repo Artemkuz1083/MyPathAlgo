@@ -26,10 +26,9 @@
                   Height="36"
                   Margin="50,10,0,0"
         >
-            <ComboBoxItem Content="Pow"/>
-            <ComboBoxItem Content="RecPow"/>
-            <ComboBoxItem Content="QuickPow #1"/>
-            <ComboBoxItem Content="QuickPow #2"/>
+            <ComboBoxItem Content="Countries"/>
+            <ComboBoxItem Content="Chemical elements"/>
+            <ComboBoxItem Content="Words"/>
         </ComboBox>
 
         <ComboBox x:Name="CmbSort"
@@ -43,10 +42,9 @@
                   Height="32"
                   VerticalAlignment="Top"
         >
-            <ComboBoxItem Content="Pow"/>
-            <ComboBoxItem Content="RecPow"/>
-            <ComboBoxItem Content="QuickPow #1"/>
-            <ComboBoxItem Content="QuickPow #2"/>
+            <ComboBoxItem Content="Прямое слияние"/>
+            <ComboBoxItem Content="Естественное слияние"/>
+            <ComboBoxItem Content="Многопутевое слияние"/>
         </ComboBox>
     </Grid>
 

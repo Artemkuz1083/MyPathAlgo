@@ -1,6 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{0D5D0EB3-F03D-4453-9720-B94E27D37817}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{0D5D0EB3-F03D-4453-9720-B94E27D37817}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMyAlgoPath", "TestMyAlgoPath\TestMyAlgoPath.csproj", "{1278C51D-3A8A-420E-8C03-E222E1106B31}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sort", "Sort\Sort.csproj", "{F7BBE98F-9744-4067-B86B-D2E7DB018E50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +19,19 @@ Global
 		{0D5D0EB3-F03D-4453-9720-B94E27D37817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D5D0EB3-F03D-4453-9720-B94E27D37817}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D5D0EB3-F03D-4453-9720-B94E27D37817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1278C51D-3A8A-420E-8C03-E222E1106B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1278C51D-3A8A-420E-8C03-E222E1106B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1278C51D-3A8A-420E-8C03-E222E1106B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1278C51D-3A8A-420E-8C03-E222E1106B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7BBE98F-9744-4067-B86B-D2E7DB018E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7BBE98F-9744-4067-B86B-D2E7DB018E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7BBE98F-9744-4067-B86B-D2E7DB018E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7BBE98F-9744-4067-B86B-D2E7DB018E50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39F6B53D-DFCA-4EEA-918E-0E2A29FA3AB6}
 	EndGlobalSection
 EndGlobal
