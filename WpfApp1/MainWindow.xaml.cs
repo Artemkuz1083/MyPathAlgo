@@ -24,7 +24,9 @@ public partial class MainWindow : Window
 
     private void Button_Click_Task1(object sender, RoutedEventArgs e)
     {
-
+        Task1 task = new Task1();
+        task.Show();
+        this.Close();
     }
 
     private void Button_Click_Task2(object sender, RoutedEventArgs e)
