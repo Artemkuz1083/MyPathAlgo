@@ -6,46 +6,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="50,115,25,99">
-            <TextBox x:Name="TbOutput"
-                     Text="Здесь будет вывод действий"
-                     Margin="0,0,0,0"
-                     BorderBrush="Black"
-                     Background="#FFF4F4F4"                                                                                   
-                    />
-        </Border>
-
-        <ComboBox x:Name="CmbFile"
-                  SelectedIndex="0"
-                  Background="White"
-                  BorderBrush="Black"
-                  BorderThickness="2"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
-                  Width="470"
-                  Height="36"
-                  Margin="50,10,0,0"
-        >
-            <ComboBoxItem Content="Countries"/>
-            <ComboBoxItem Content="Chemical elements"/>
-            <ComboBoxItem Content="Words"/>
-        </ComboBox>
-
-        <ComboBox x:Name="CmbSort"
-                  SelectedIndex="0"
-                  Background="White"
-                  BorderBrush="Black"
-                  BorderThickness="2"
-                  Margin="50,60,0,0"
-                  HorizontalAlignment="Left"
-                  Width="170"
-                  Height="32"
-                  VerticalAlignment="Top"
-        >
-            <ComboBoxItem Content="Прямое слияние"/>
-            <ComboBoxItem Content="Естественное слияние"/>
-            <ComboBoxItem Content="Многопутевое слияние"/>
-        </ComboBox>
+        <Button x:Name="Task1" Content="Task1" HorizontalAlignment="Right" Margin="0,277,594,0" Width="136" Click="Button_Click_Task1" Height="55" VerticalAlignment="Top"/>
+        <Button x:Name="Task2" Content="Task2" HorizontalAlignment="Right" Margin="0,277,332,0" VerticalAlignment="Top" Height="55" Width="136" Click="Button_Click_Task2"/>
+        <Button x:Name="Task3" Content="Task3" Margin="570,277,0,0" VerticalAlignment="Top" Height="55" HorizontalAlignment="Left" Width="136" Click="Button_Click_Task3"/>
+        <Label Content="Выберите задание" HorizontalAlignment="Center" Margin="0,0,0,320" VerticalAlignment="Bottom" Height="57" Width="516" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
     </Grid>
 
 </Window>

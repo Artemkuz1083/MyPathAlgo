@@ -13,30 +13,40 @@ namespace Sort
         //файлах в сумме
         private long _iterations, _segments;
 
+        public readonly List<String> _result;
+
         //Индекс выбранного столбца, по которому будем сортировать
         private readonly int _chosenField;
 
-        public DirectOuterSort(int choosenField)
+        private readonly string _pathFile;
+
+        public DirectOuterSort(int choosenField, string pathFile)
         {
             _chosenField = choosenField;
             _iterations = 1;
+            _pathFile = pathFile;
+            _result = new List<String>();
+
         }
 
 
         private void SplitToFiles()
         {
             _segments = 1;
-            using var fileA = new StreamReader("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileA.csv");
+            using var fileA = new StreamReader(_pathFile);
+
             _header = fileA.ReadLine()!;
 
-            using var fileB = new StreamWriter("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileB.csv");
-            using var fileC = new StreamWriter("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileC.csv");
+            using var fileB = new StreamWriter("Tabels\\FileB.csv");
+            using var fileC = new StreamWriter("Tabels\\FileC.csv");
 
             string? currentRecord = fileA.ReadLine();
 
             bool flag = true;
             int counter = 0;
-           
+
+            _result.Add($"Делим массив данных по {_iterations}");
+
             while (currentRecord is not null)
             {
            
@@ -48,11 +58,13 @@ namespace Sort
                 }
 
                 if (flag)
-                {           
+                {
+                    _result.Add($"Добавляем в файл B строку: {currentRecord}");
                     fileB.WriteLine(currentRecord);
                 }
                 else
                 {                 
+                    _result.Add($"Добавляем в файл C строку: {currentRecord}");
                     fileC.WriteLine(currentRecord);
                 }
 
@@ -63,10 +75,14 @@ namespace Sort
 
         private void MergePairs()
         {
-            using var writerA = new StreamWriter(@"C:\Users\artem\source\repos\MyPathAlgo\Tabels\FileA.csv");
-            using var readerB = new StreamReader(@"C:\Users\artem\source\repos\MyPathAlgo\Tabels\FileB.csv");
-            using var readerC = new StreamReader(@"C:\Users\artem\source\repos\MyPathAlgo\Tabels\FileC.csv");
+            _result.Add($"По элементно будем сравнивать по {_chosenField} столбу элементы из файла B и C и будем записывать их в файл A");
 
+            using var writerA = new StreamWriter("Tabels\\FileA.csv");
+            using var readerB = new StreamReader("Tabels\\FileB.csv");
+            using var readerC = new StreamReader("Tabels\\FileC.csv");
+
+
+            _result.Add($"добавляем в файл заголовок {_header}");
             writerA.WriteLine(_header);
 
             string? strB = readerB.ReadLine();
@@ -82,22 +98,26 @@ namespace Sort
 
                 if (strB is null || counterB == _iterations)
                 {
+                    _result.Add("Так как файл B пустой будем работать с файлом C");
                     currentRecord = strC;
                 }
                 else if (strC is null || counterC == _iterations)
                 {
+                    _result.Add("Так как файл C пустой будем работать с файлом B");
                     currentRecord = strB;
                     flag = true;
                 }
                 else
-                {                   
+                {
                     if (CompareElements(strB, strC))
-                    {                        
+                    {
+                        _result.Add($"Элемент {strB.Split(';')[_chosenField]} из файла B меньше чем {strC.Split(';')[_chosenField]} из файла C");
                         currentRecord = strB;
                         flag = true;
                     }
                     else
-                    {                       
+                    {
+                        _result.Add($"Элемент {strC.Split(';')[_chosenField]} из файла C меньше чем {strB.Split(';')[_chosenField]} из файла B");
                         currentRecord = strC;
                     }
                 }
@@ -106,11 +126,13 @@ namespace Sort
 
                 if (flag)
                 {
+                    _result.Add($"Записываем {strB} в файл A");
                     strB = readerB.ReadLine();
                     counterB++;
                 }
                 else
                 {
+                    _result.Add($"Записываем {strC} в файл A");
                     strC = readerC.ReadLine();
                     counterC++;
                 }
@@ -135,7 +157,6 @@ namespace Sort
             {
                 return el1Int.CompareTo(el2Int) < 0;
             }
-
 
             return string.Compare(el1, el2, StringComparison.Ordinal) < 0;
         }

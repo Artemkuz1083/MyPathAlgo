@@ -1,11 +1,6 @@
-Country;Continent;Capital;Area (km?);Population
-South Africa;Africa;Pretoria;1219090;59308690
-China;Asia;Beijing;9596961;1439323776
-India;Asia;New Delhi;3287263;1380004385
-Russia;Eurasia;Moscow;17098242;146599183
-France;Europe;Paris;551695;65273511
-Germany;Europe;Berlin;357022;83783942
-USA;North America;Washington;9372610;331002651
-Mexico;North America;Mexico City;1964375;128932753
-Australia;Oceania;Canberra;7692024;25499884
-Brazil;South America;Brasilia;8515767;212559417
+Substance Class;Substance Name;Molecular Weight
+Alcohol;Ethanol;46.07
+Salt;Sodium Chloride;58.44
+Acid;Sulfuric Acid;98.08
+Base;Sodium Hydroxide;40.00
+Hydrocarbon;Methane;46.04

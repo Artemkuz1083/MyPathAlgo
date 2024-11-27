@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Sort
 {
@@ -13,28 +14,32 @@ namespace Sort
         //В этом списке будут храниться длины всех серий в обоих подфайлах
         private readonly List<int> _series = new();
 
-        public NaturalOuterSort(int chosenField)
+        private readonly string _pathFile;
+
+        public readonly List<string> _result = new();
+
+        public NaturalOuterSort(int chosenField, string pathFile)
         {
             _chosenField = chosenField;
+            _pathFile = pathFile;
         }
 
         private void SplitToFiles()
         {
-            using var fileA = new StreamReader("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileA.csv");
+            using var fileA = new StreamReader(_pathFile);
+
             _headers = fileA.ReadLine();
 
-            using var fileB = new StreamWriter("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileB.csv");
-            using var fileC = new StreamWriter("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileC.csv");
-            //считываем строку, которую будем записывать в подфайл, и следующую за ней, чтобы 
-            //сравнить их и проверить, закончилась серия или нет
+            using var fileB = new StreamWriter("Tabels\\FileB.csv");
+            using var fileC = new StreamWriter("Tabels\\FileC.csv");
+
             string? firstStr = fileA.ReadLine();
             string? secondStr = fileA.ReadLine();
             bool flag = true;
             int counter = 0;
             while (firstStr is not null)
             {
-                //Доп. флаг нужен, чтобы при окончании серии не потерять последнюю запись в этой
-                //самой серии
+
                 bool tempFlag = flag;
                 if (secondStr is not null)
                 {
@@ -44,7 +49,6 @@ namespace Sort
                     }
                     else
                     {
-                        //Если серия прервалась, то записываем её длину в список и обнуляем счётчик
                         tempFlag = !tempFlag;
                         _series.Add(counter + 1);
                         counter = 0;
@@ -53,14 +57,16 @@ namespace Sort
 
                 if (flag)
                 {
+                    _result.Add($"Добавляем {firstStr} в файл B");
                     fileB.WriteLine(firstStr);
                 }
                 else
                 {
+
+                    _result.Add($"Добавляем {firstStr} в файл C");
                     fileC.WriteLine(firstStr);
                 }
 
-                //движемся к следующей записи
                 firstStr = secondStr;
                 secondStr = fileA.ReadLine();
                 flag = tempFlag;
@@ -71,9 +77,9 @@ namespace Sort
 
         private void MergePairs()
         {
-            using var writerA = new StreamWriter("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileA.csv");
-            using var readerB = new StreamReader("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileB.csv");
-            using var readerC = new StreamReader("C:\\Users\\artem\\source\\repos\\MyPathAlgo\\Tabels\\FileC.csv");
+            using var writerA = new StreamWriter(_pathFile);
+            using var readerB = new StreamReader("Tabels\\FileB.csv");
+            using var readerC = new StreamReader("Tabels\\FileC.csv");
 
             //Не забываем про заголовки
             writerA.WriteLine(_headers);
@@ -102,6 +108,7 @@ namespace Sort
                 if (indexB == _series.Count || counterB == _series[indexB])
                 {
                     //Случай, когда мы дошли до конца серии в подфайле B
+                    _result.Add($"Записываем {elementC} в A, т.к. закончилась серия в подфайле B");
                     writerA.WriteLine(elementC);
                     elementC = readerC.ReadLine();
                     counterC++;
@@ -111,6 +118,7 @@ namespace Sort
                 if (indexC == _series.Count || counterC == _series[indexC])
                 {
                     //Случай, когда мы дошли до конца серии в подфайле C
+                    _result.Add($"Записываем {elementB} в A, т.к. закончилась серия в подфайле C");
                     writerA.WriteLine(elementB);
                     elementB = readerB.ReadLine();
                     counterB++;
@@ -120,12 +128,14 @@ namespace Sort
                 //Сравниваем записи по заданному полю и вписывам в исходный файл меньшую из них
                 if (CompareElements(elementB, elementC))
                 {
+                    _result.Add($"Элемент {elementB.Split(';')[_chosenField]} из файла B меньше чем {elementC.Split(';')[_chosenField]} из файла C");
                     writerA.WriteLine(elementB);
                     elementB = readerB.ReadLine();
                     counterB++;
                 }
                 else
                 {
+                    _result.Add($"Элемент {elementC.Split(';')[_chosenField]} из файла C меньше чем {elementB.Split(';')[_chosenField]} из файла B");
                     writerA.WriteLine(elementC);
                     elementC = readerC.ReadLine();
                     counterC++;

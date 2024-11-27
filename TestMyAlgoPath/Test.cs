@@ -12,12 +12,12 @@ namespace TestMyAlgoPath
 
         public static void Main()
         {
-            //NaturalOuterSort naturalOuterSort = new NaturalOuterSort(3);
+            NaturalOuterSort naturalOuterSort = new NaturalOuterSort(3, "Tabels\\ReadyTabels\\Countries.csv");
 
-            //naturalOuterSort.Sort();
+            naturalOuterSort.Sort();
 
-            DirectOuterSort directOuterSort = new DirectOuterSort(1);
-            directOuterSort.Sort();
+            //DirectOuterSort directOuterSort = new DirectOuterSort(1);
+            //directOuterSort.Sort();
 
         }
     }

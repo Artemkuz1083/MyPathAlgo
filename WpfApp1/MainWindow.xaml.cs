@@ -19,5 +19,25 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+   
+    }
+
+    private void Button_Click_Task1(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Button_Click_Task2(object sender, RoutedEventArgs e)
+    {
+        Task2 task = new Task2();
+        task.Show();
+        this.Close();
+    }
+
+    private void Button_Click_Task3(object sender, RoutedEventArgs e)
+    {
+        Task3 task = new Task3();
+        task.Show();
+        this.Close();
     }
 }
