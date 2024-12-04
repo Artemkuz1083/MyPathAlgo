@@ -77,7 +77,7 @@ namespace Sort
         {
             _result.Add($"По элементно будем сравнивать по {_chosenField} столбу элементы из файла B и C и будем записывать их в файл A");
 
-            using var writerA = new StreamWriter("Tabels\\FileA.csv");
+            using var writerA = new StreamWriter(_pathFile);
             using var readerB = new StreamReader("Tabels\\FileB.csv");
             using var readerC = new StreamReader("Tabels\\FileC.csv");
 

@@ -68,6 +68,7 @@ namespace WpfApp1
 
             if (int.TryParse(TbInput.Text, out int input))
             {
+                input -= 1;
                 switch (selectedSort)
                 {
                     case "Прямое слияние":
