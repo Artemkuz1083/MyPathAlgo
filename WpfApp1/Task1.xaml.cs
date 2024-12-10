@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Логика взаимодействия для Task1.xaml
-    /// </summary>
     public partial class Task1 : Window
     {
         public Task1()
@@ -24,7 +15,6 @@ namespace WpfApp1
             InitializeComponent();
         }
 
-       
         private void InputArray_GotFocus(object sender, RoutedEventArgs e)
         {
             if (InputArray.Text == "Введите значения через запятую")
@@ -34,7 +24,6 @@ namespace WpfApp1
             }
         }
 
-        
         private void InputArray_LostFocus(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(InputArray.Text))
@@ -58,6 +47,7 @@ namespace WpfApp1
 
             LogBox.Clear();
             ArrayState.Text = "";
+            DrawArray(array);
 
             var selectedMethod = (SortMethodsComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
@@ -78,6 +68,39 @@ namespace WpfApp1
                 default:
                     MessageBox.Show("Выберите метод сортировки.");
                     break;
+            }
+        }
+
+        private void DrawArray(int[] array)
+        {
+            Canvas.Children.Clear();
+            double width = Canvas.ActualWidth / array.Length;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                // Столбики
+                Rectangle rect = new Rectangle
+                {
+                    Width = width - 2,
+                    Height = array[i] * 5, // Масштабирование высоты
+                    Fill = Brushes.Blue,
+                    Stroke = Brushes.Black
+                };
+                Canvas.SetLeft(rect, i * width);
+                Canvas.SetBottom(rect, 0);
+                Canvas.Children.Add(rect);
+
+                // Подписи над столбиками
+                TextBlock textBlock = new TextBlock
+                {
+                    Text = array[i].ToString(),
+                    Width = width - 2,
+                    TextAlignment = TextAlignment.Center,
+                    Foreground = Brushes.Black
+                };
+                Canvas.SetLeft(textBlock, i * width);
+                Canvas.SetBottom(textBlock, array[i] * 5 + 5); // Позиция над столбиком
+                Canvas.Children.Add(textBlock);
             }
         }
 
@@ -107,6 +130,7 @@ namespace WpfApp1
         private void UpdateArrayState(int[] array)
         {
             ArrayState.Text = string.Join(", ", array);
+            DrawArray(array);
         }
 
         private void Log(string message)
@@ -130,7 +154,7 @@ namespace WpfApp1
                 {
                     Log($"Сравниваем {array[j]} и {array[j + 1]}.");
 
-                    if (array[j] > array[j + 1]) 
+                    if (array[j] > array[j + 1])
                     {
                         Log($"Меняем местами {array[j]} и {array[j + 1]}.");
                         (array[j], array[j + 1]) = (array[j + 1], array[j]);
@@ -260,10 +284,7 @@ namespace WpfApp1
             Log($"Ставим опорное число {pivot} на место.");
             (array[i + 1], array[high]) = (array[high], array[i + 1]);
             UpdateArrayState(array);
-            await Task.Delay(delay);
-
             return i + 1;
         }
     }
 }
-
